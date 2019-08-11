@@ -2,7 +2,7 @@
 
 > Why apache kafka
 
-- Created by Linkedln, now open source project mainly maintained by confluent
+- Created by `Linkedln`, now open source project mainly maintained by confluent
 - Distributed, resilient architecture, fault tolerant
 - Horizontal scalability
   - Can scale to 100s of brokers
@@ -10,13 +10,13 @@
 - High performance(latency of less than 10ms) - real time
 - Used by the 2000+ firms, 35% of the fortune 500:
 
-  - aribnb
-  - linkedIn
+  - Aribnb
+  - LinkedIn
   - Uber
   - Netflix
-  - walmart
+  - Walmart
 
-  > Use cases
+> Use cases
 
 - Messaging system
 - Activity tracking
@@ -28,8 +28,8 @@
 
 > Example
 
-- Netflix uses Kafka to apply recommendations in real-time while you're watching TV shows
-- Uber uses Kafka to gather user,taxi and trip data in real-time to compute and forecast demand, and compute surge pricing in real-time
-- LinkedIn uses Kafda to prevent spam, collect user interactions to make better connection recommendations in real time.
+- `Netflix` uses Kafka to apply recommendations in real-time while you're watching TV shows
+- `Uber` uses Kafka to gather user,taxi and trip data in real-time to compute and forecast demand, and compute surge pricing in real-time
+- `LinkedIn` uses Kafda to prevent spam, collect user interactions to make better connection recommendations in real time.
 
 > Remember that Kafka is only used as a transportation mechanism!
