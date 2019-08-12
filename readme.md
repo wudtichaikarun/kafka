@@ -73,3 +73,9 @@
 ![topics-ex](./images/topics-ex.png)
 
 ![topics-partitions-offsets](./images/topics-partitions-offsets-2.png)
+
+9. Brokers
+
+![brokers](./images/brokers.png)
+
+![brokers-topics](./images/brokers-topics.png)
