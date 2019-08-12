@@ -66,7 +66,7 @@
 
 > ## section:4 Kafka theory
 
-8. Topics, Partitions and Offsets
+> 8. Topics, Partitions and Offsets
 
 ![topics-partitions-offsets](./images/topics-partitions-offsets.png)
 
@@ -74,8 +74,24 @@
 
 ![topics-partitions-offsets](./images/topics-partitions-offsets-2.png)
 
-9. Brokers
+> 9. Brokers
 
 ![brokers](./images/brokers.png)
 
 ![brokers-topics](./images/brokers-topics.png)
+
+> 10. Topic replication factor
+
+![topic-replication-1](./images/topic-replication-1.png)
+
+![topic-replication-2](./images/topic-replication-2.png)
+
+![topic-replication-3](./images/topic-replication-3.png)
+
+> 11. Producers and Message Keys
+
+![producers-1](./images/producers-1.png)
+
+![producers-2](./images/producers-2.png)
+
+![producers-3](./images/producers-3.png)
