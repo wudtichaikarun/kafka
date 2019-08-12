@@ -95,3 +95,17 @@
 ![producers-2](./images/producers-2.png)
 
 ![producers-3](./images/producers-3.png)
+
+> 12. Consumers
+
+Consumers
+
+![consumers-1](./images/consumers-1.png)
+
+Consumer Groups
+
+![consumers-2](./images/consumers-2.png)
+
+![consumers-3](./images/consumers-3.png)
+
+> 13. Consumer Offsets
