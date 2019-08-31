@@ -2,7 +2,31 @@
 
 [kafka-beginners-course](https://github.com/simplesteph/kafka-beginners-course)
 
-## Medium
+# Course content
+
+- [x] Section 1 Kafka Introduction
+- [x] Section 2 Code Download
+- [x] Section 3 Kafka Fundamentals
+- [x] Section 4 Kafka Theory
+- [x] Section 5 Starting Kafka
+- [ ] Section 6 CLI
+- [ ] Section 7 Kafka Java Programming 101
+- [ ] Section 8 Kafka Real World Project
+- [ ] Section 9 Kafka Twitter Producer & Advanced Configuration
+- [ ] Section 10 Kafka ElasticSearch Consumer & Advanced Configurations
+- [ ] Section 11 Kafka Ecosystem & Real World Architectures
+- [ ] Section 12 Kafka Extended APIs for Developers
+- [ ] Section 13 Real World Insights and Case Studies(Big Data/Fast Data)
+- [ ] Section 14 Kafka In the Enterprise for Admins
+- [ ] Section 15 Advanced Kafka
+- [ ] Section 16 Advanced Topics Configurations
+- [ ] Section 17 Annexes
+- [ ] Section 18 Annex Starting Kafka Differently
+- [ ] Section 19 Next Steps
+
+---
+
+## Medium document about kafka
 
 - [Apache Kafka ฉบับผู้เริ่มต้น #1: Hello Apache Kafka](https://medium.com/linedevth/apache-kafka-%E0%B8%89%E0%B8%9A%E0%B8%B1%E0%B8%9A%E0%B8%9C%E0%B8%B9%E0%B9%89%E0%B9%80%E0%B8%A3%E0%B8%B4%E0%B9%88%E0%B8%A1%E0%B8%95%E0%B9%89%E0%B8%99-1-hello-apache-kafka-242788d4f3c6)
 - [Apache Kafka ฉบับผู้เริ่มต้น #2: Core concepts](https://medium.com/linedevth/apache-kafka-%E0%B8%89%E0%B8%9A%E0%B8%B1%E0%B8%9A%E0%B8%9C%E0%B8%B9%E0%B9%89%E0%B9%80%E0%B8%A3%E0%B8%B4%E0%B9%88%E0%B8%A1%E0%B8%95%E0%B9%89%E0%B8%99-2-core-concepts-7dfd4358ec04)
@@ -78,7 +102,11 @@
 
 ![Ecosystem](./images/ecosystem.png)
 
-> ## section:4 Kafka theory
+---
+
+## <b>SECTION:4 KAFKA THEORY</b>
+
+---
 
 > 8. Topics, Partitions and Offsets
 
@@ -145,3 +173,49 @@ Consumer Groups
 > 17. Theory Roundup
 
 ![theory-roundup](./images/theory-roundup.png)
+
+Starting Kafka
+
+---
+
+## <b>Section 6 CLI(command line interface)</b>
+
+---
+
+Example project by NV4RE [kafka nodeJs example project](https://github.com/devit-tel/example-kafka-node)
+
+> Note kafka zookeeper start at default 127.0.0.1:2181
+
+- start zookeeper server cd to kafka directory and `zookeeper-server-start.sh config/zookeeper.properties`
+
+- start kafka server cd to kafka directory `kafka-server-start.sh config/server.properties`
+
+---
+
+### KAFKA TOPIC CLI
+
+> Note start kafka server and kafka zookeeper first.
+
+- create topics `kafka-topics.sh --zookeeper 127.0.0.1:2181 --topic first_topic --create --partitions 3 --replication-factor 1`
+
+```
+WARNING: Due to limitations in metric names, topics with a period ('.') or underscore ('_') could collide. To avoid issues it is best to use either, but not both.
+Created topic first_topic.
+```
+
+- list topics `kafka-topics.sh --zookeeper 127.0.0.1:2181 --list`
+
+```
+first_topic
+```
+
+- describe topics specific topic name `kafka-topics.sh --zookeeper 127.0.0.1:2181 --topic first_topic --describe`
+
+```
+Topic:first_topic	PartitionCount:3	ReplicationFactor:1	Configs:
+	Topic: first_topic	Partition: 0	Leader: 0	Replicas: 0	Isr: 0
+	Topic: first_topic	Partition: 1	Leader: 0	Replicas: 0	Isr: 0
+	Topic: first_topic	Partition: 2	Leader: 0	Replicas: 0	Isr: 0
+```
+
+- delete topics specific topic name `kafka-topics.sh --zookeeper 127.0.0.1:2181 --topic first_topic --delete`

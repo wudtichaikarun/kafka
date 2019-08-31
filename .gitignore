@@ -1,10 +1,15 @@
 # General
+
+kafka_2.12-2.3.0
+kafka-beginners-course
+
 .DS_Store
 .AppleDouble
 .LSOverride
 
 # Icon must end with two \r
-Icon
+Icon
+
 
 # Thumbnails
 ._*
