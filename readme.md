@@ -192,7 +192,7 @@ Example project by NV4RE [kafka nodeJs example project](https://github.com/devit
 
 ---
 
-### KAFKA TOPIC CLI
+### 32. KAFKA TOPIC CLI
 
 > Note start kafka server and kafka zookeeper first.
 
@@ -205,13 +205,13 @@ Created topic first_topic.
 
 - list topics `kafka-topics.sh --zookeeper 127.0.0.1:2181 --list`
 
-```
-first_topic
+```javascript
+first_topic;
 ```
 
 - describe topics specific topic name `kafka-topics.sh --zookeeper 127.0.0.1:2181 --topic first_topic --describe`
 
-```
+```javascript
 Topic:first_topic	PartitionCount:3	ReplicationFactor:1	Configs:
 	Topic: first_topic	Partition: 0	Leader: 0	Replicas: 0	Isr: 0
 	Topic: first_topic	Partition: 1	Leader: 0	Replicas: 0	Isr: 0
@@ -219,3 +219,130 @@ Topic:first_topic	PartitionCount:3	ReplicationFactor:1	Configs:
 ```
 
 - delete topics specific topic name `kafka-topics.sh --zookeeper 127.0.0.1:2181 --topic first_topic --delete`
+
+---
+
+### 33. KAFKA CONSOLE PRODUCER CLI
+
+- produce message `kafka-console-producer.sh --broker-list 127.0.0.1:9092 --topic first_topic`
+
+```javascript
+>hello romantic
+>hi ro
+>hey ro
+// control c for exit
+```
+
+- produce message with acks=all `kafka-console-producer.sh --broker-list 127.0.0.1:9092 --topic first_topic --producer-property acks=all`
+
+- produce message topic does not exits `kafka-console-producer.sh --broker-list 127.0.0.1:9092 --topic new_topic`
+
+```javascript
+> kafka-console-producer.sh --broker-list 127.0.0.1:9092 --topic new_topic
+> hey
+[2019-09-01 21:07:43,262] WARN [Producer clientId=console-producer] Error while fetching metadata with correlation id 3 : {new_topic=LEADER_NOT_AVAILABLE} (org.apache.kafka.clients.NetworkClient)
+
+// but kafka will auto create topic new_topic
+
+// list all topics again
+> kafka-topics.sh --zookeeper 127.0.0.1:2181 --list
+// result
+first_topic
+new_topic
+
+// describe new_topic
+> kafka-topics.sh --zookeeper 127.0.0.1:2181 --topic new_topic --describe
+// result default setup (num.partitions=1)
+Topic:new_topic	PartitionCount:1	ReplicationFactor:1	Configs:
+	Topic: new_topic	Partition: 0	Leader: 0	Replicas: 0	Isr: 0
+
+// change default partitions at file config/server.properties
+num.partitions=3
+
+// to test auto create topic with 3 partitions stop kafka server and start it's again
+> kafka-console-producer.sh --broker-list 127.0.0.1:9092 --topic new_topic_2
+>hey
+[2019-09-01 21:18:38,768] WARN [Producer clientId=console-producer] Error while fetching metadata with correlation id 3 : {new_topic_2=LEADER_NOT_AVAILABLE} (org.apache.kafka.clients.NetworkClient)
+// control c for exit
+
+>kafka-topics.sh --zookeeper 127.0.0.1:2181 --topic new_topic --describe
+// result
+Topic:new_topic_2	PartitionCount:3	ReplicationFactor:1	Configs:
+	Topic: new_topic_2	Partition: 0	Leader: 0	Replicas: 0	Isr: 0
+	Topic: new_topic_2	Partition: 1	Leader: 0	Replicas: 0	Isr: 0
+	Topic: new_topic_2	Partition: 2	Leader: 0	Replicas: 0	Isr: 0
+```
+
+---
+
+### 34. KAFKA CONSOLE CONSUMER CLI
+
+> open 2 tab of terminal
+
+```javascript
+// terminal 1 is a producer
+// [1]
+> kafka-console-producer.sh --broker-list 127.0.0.1:9092 --topic first_topic
+// [3]
+> hey
+```
+
+```javascript
+// terminal 1 is a consumer
+// [2]
+> kafka-console-consumer.sh --bootstrap-server 127.0.0.1:9092 --topic first_topic
+// [4] message from [3] will appear.
+hey
+```
+
+- consumer topic `kafka-console-consumer.sh --bootstrap-server 127.0.0.1:9092 --topic first_topic`
+- all message from beginning `kafka-console-consumer.sh --bootstrap-server 127.0.0.1:9092 --topic first_topic --from-beginning`
+
+```
+hi ro
+just for fun
+hey ro
+fun learning
+hey
+hello romantic
+some message that is acked
+this is a new message
+```
+
+---
+
+### 35. KAFKA CONSUMERS IN GROUP
+
+> Consumer group [Rebalanced and shared the load]
+
+Test by open 4 Terminal 1 is producer and 3 are consumer group
+
+```javascript
+// Terminal 1 producer
+> kafka-console-producer.sh --broker-list 127.0.0.1:9092 --topic first_topic
+```
+
+```javascript
+// Terminal 2 consumer group name my-first-application
+> kafka-console-consumer.sh --bootstrap-server 127.0.0.1:9092 --topic first_topic --group my-first-application
+// result
+message 2
+```
+
+```javascript
+// Terminal 3 consumer group name my-first-application
+> kafka-console-consumer.sh --bootstrap-server 127.0.0.1:9092 --topic first_topic --group my-first-application
+// resul
+message 3
+```
+
+```javascript
+// Terminal 4 consumer group name my-first-application
+> kafka-console-consumer.sh --bootstrap-server 127.0.0.1:9092 --topic first_topic --group my-first-application
+// result
+message 1
+```
+
+---
+
+### 35. KAFKA CONSUMER GROUP CLI
