@@ -345,4 +345,123 @@ message 1
 
 ---
 
-### 35. KAFKA CONSUMER GROUP CLI
+### 36. KAFKA CONSUMER GROUP CLI
+
+- consumer group list
+
+```javascript
+> kafka-consumer-groups.sh --bootstrap-server 127.0.0.1:9092 --list
+// result
+my-first-application
+
+// or use localhost instead of 127.0.0.1
+
+> kafka-consumer-groups.sh --bootstrap-server localhost:9092 --list
+// result
+my-first-application
+```
+
+- describe consumer group specific group name
+
+```javascript
+> kafka-consumer-groups.sh --bootstrap-server 127.0.0.1:9092 --describe --group my-first-application
+// result
+GROUP                TOPIC           PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID                                     HOST            CLIENT-ID
+my-first-application first_topic     0          5               5               0               consumer-1-bfc8df14-a3e9-47a9-a4e9-4f13d86523de /192.168.43.87  consumer-1
+my-first-application first_topic     1          6               6               0               consumer-1-bfc8df14-a3e9-47a9-a4e9-4f13d86523de /192.168.43.87  consumer-1
+my-first-application first_topic     2          5               5               0               consumer-1-bfc8df14-a3e9-47a9-a4e9-4f13d86523de /192.168.43.87  consumer-1
+
+// Note LAG Lagging คือ messsage ที่ produce ไปแล้วยังไม่ได้ consume
+
+```
+
+---
+
+### 37. RESETTING OFFSETS
+
+- reset offsets options `--to-earliest`
+
+```javascript
+> kafka-consumer-groups.sh --bootstrap-server 127.0.0.1:9092 --group my-first-application --reset-offsets --to-earliest --execute --topic first_topic
+
+// result
+GROUP                          TOPIC                          PARTITION  NEW-OFFSET
+my-first-application           first_topic                    0          0
+my-first-application           first_topic                    2          0
+my-first-application           first_topic                    1          0
+```
+
+> What happens now if restart consumer ?
+
+```javascript
+// The answer is all of data will show all over again.
+> kafka-console-consumer.sh --bootstrap-server 127.0.0.1:9092 --topic first_topic --group my-first-application
+
+// result 19 messages
+hi ro
+just for fun
+btw really awesome course
+another message
+message 3
+hi2
+hey ro
+fun learning
+hey
+hello new consumer
+message 1
+hello again
+hi3
+hello romantic
+some message that is acked
+this is a new message
+one message
+message 2
+hi1
+```
+
+- reset offsets options `--shift-by -2`
+
+```javascript
+// Note close connection kafka-console-consumer.sh before use cli
+> kafka-consumer-groups.sh --bootstrap-server 127.0.0.1:9092 --group my-first-application --reset-offsets --shift-by -2  --execute --topic first_topic
+
+// result
+GROUP                          TOPIC                          PARTITION  NEW-OFFSET
+my-first-application           first_topic                    0          4
+my-first-application           first_topic                    2          4
+my-first-application           first_topic                    1          5
+
+// consume message
+> kafka-console-consumer.sh --bootstrap-server 127.0.0.1:9092 --topic first_topic --group
+
+// result 6 messages
+// --shift-by -2  mean shift by two offsets on each partion.
+my-first-application
+message 3
+hi2
+hello again
+hi3
+message 2
+hi1
+```
+
+---
+
+## 38. CLI OPTIONS THAT ARE GOOD TO KNOW
+
+```javascript
+// Producer with keys
+> kafka-console-producer.sh --broker-list 127.0.0.1:9092 --topic first_topic --property parse.key=true --property key.separator=,
+> key,value
+> another key,another value
+
+// Consumer with keys
+> kafka-console-consumer.sh --bootstrap-server 127.0.0.1:9092 --topic first_topic --from-beginning --property print.key=true --property key.separator=,
+
+```
+
+---
+
+## 39. WHAT ABOUT UIS
+
+- Kafka Manager (for managing Kafka and instead of using CLI): [github kafka-manager](https://github.com/yahoo/kafka-manager)
