@@ -465,3 +465,11 @@ hi1
 ## 39. WHAT ABOUT UIS
 
 - Kafka Manager (for managing Kafka and instead of using CLI): [github kafka-manager](https://github.com/yahoo/kafka-manager)
+
+---
+
+## 40. KAFKA TOOL UI
+
+- [Link kafka tool ui](http://www.kafkatool.com/download.html)
+  ![kafka-tools topic](./images/kafka-tools-1.png)
+  ![kafka-tools data](./images/kafka-tools-2.png)
