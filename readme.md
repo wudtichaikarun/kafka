@@ -9,7 +9,7 @@
 - [x] Section 3 Kafka Fundamentals
 - [x] Section 4 Kafka Theory
 - [x] Section 5 Starting Kafka
-- [ ] Section 6 CLI
+- [x] Section 6 CLI
 - [ ] Section 7 Kafka Java Programming 101
 - [ ] Section 8 Kafka Real World Project
 - [ ] Section 9 Kafka Twitter Producer & Advanced Configuration
@@ -473,3 +473,13 @@ hi1
 - [Link kafka tool ui](http://www.kafkatool.com/download.html)
   ![kafka-tools topic](./images/kafka-tools-1.png)
   ![kafka-tools data](./images/kafka-tools-2.png)
+
+---
+
+## 41.KAFKACAT AS A REPLACEMENT FOR KAFKA CLI
+
+[KafkaCat](https://github.com/edenhill/kafkacat) is an open-source alternative to using the Kafka CLI, created by Magnus Edenhill.
+
+While KafkaCat is not used in this course, if you have any interest in trying it out, I recommend [reading](https://medium.com/@coderunner/debugging-with-kafkacat-df7851d21968)
+
+# SECTION 7: KAFKA JAVA PROGRAMMING 101
